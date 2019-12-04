@@ -1,16 +1,26 @@
 package com.learn.user;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import com.learn.post.Post;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="Users details info")
+@Entity
 public class User {
 
+	@Id
+	@GeneratedValue
 	private Integer id;
 	
 	@Size(min=2, message="Name should have alteast 2 characters")
@@ -21,11 +31,12 @@ public class User {
 	@ApiModelProperty(notes="Birth date should have past date and time")
 	private Date birthDate;
 	
-//	protected User() {}  // default constructor is not required with latest spring boot versions
+	@OneToMany(mappedBy = "user")
+	private List<Post> posts;
+	public User() {}  // default constructor is not required with latest spring boot versions
 
-	public User(Integer id, String name, Date birthDate) {
+	public User( String name, Date birthDate) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.birthDate = birthDate;
 	}
@@ -57,5 +68,13 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 }
