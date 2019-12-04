@@ -26,12 +26,8 @@
 		</dependency>
 
 		<!-- configuring HATEOAS -->
-		<!--  
-		<dependency>
-			<groupId>org.springframework.hateoas</groupId>
-			<artifactId>spring-hateoas</artifactId>
-		</dependency>
--->
+		<!-- <dependency> <groupId>org.springframework.hateoas</groupId> <artifactId>spring-hateoas</artifactId> 
+			</dependency> -->
 		<!-- Configuring xml format support -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -50,7 +46,7 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		
+
 		<!-- swagger-ui -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -82,7 +78,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				</plugin>
+			</plugin>
 		</plugins>
 	</build>
 
