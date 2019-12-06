@@ -18,14 +18,14 @@ public class UserResourceControllerTest extends MicroServicesCloudApplicationTes
 		mockMvc.perform(
 				MockMvcRequestBuilders.get("/users").accept(MediaType.APPLICATION_JSON)
 				)
-				.andExpect(jsonPath("$", hasSize(4))).andDo(print());
+				.andExpect(jsonPath("$", hasSize(6) ));
 	}
 	
 	@Test
 	public void shouldReturnUserById() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/users/1").accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/users/101").accept(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").exists())
-				.andExpect(jsonPath("$.name").value("ram"));
+				.andExpect(jsonPath("$.name").value("Aaryan"));
 	}
 	
 	@Test
@@ -35,5 +35,19 @@ public class UserResourceControllerTest extends MicroServicesCloudApplicationTes
 				.andExpect(jsonPath("$.message").value("id : 12 not found"));
 		
 		
+	}
+	
+	@Test
+	public void shouldAddNewUser() throws Exception {
+		
+		mockMvc.perform(MockMvcRequestBuilders.post("/users")
+				
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("{\"name\": \"ajay\", \"birthDate\": \"2018-03-29\"}")
+//				.accept(MediaType.APPLICATION_JSON)
+				)
+				.andExpect(MockMvcResultMatchers.status().is(201))
+				.andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost/users/1"))
+				.andDo(print());
 	}
 }
